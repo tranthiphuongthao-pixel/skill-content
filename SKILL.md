@@ -1,55 +1,65 @@
-# SKILL: Branding Check
+# SKILL: SEO Content Review
 
-Tự động kiểm tra mức độ áp dụng branding cho toàn bộ bài viết SEO của một dự án.
+Tự động kiểm tra bài viết SEO theo checklist branding từ Google Sheet.
 
 ## Kết nối nền tảng ngoài
-- **Google Sheets API** — đọc danh sách bài từ content sheet + checklist branding + ghi kết quả vào tab "Báo cáo Branding"
-- **Google Docs API** — đọc nội dung từng bài viết
-- **Claude CLI** (`claude -p`) — phân tích mức độ áp dụng branding theo từng tiêu chí
+- **Google Sheets API** — đọc danh sách bài + checklist + ghi kết quả
+- **Google Docs API** — đọc toàn bộ nội dung bài viết
+- **Claude CLI** (`claude -p`) — phân tích nội dung theo từng tiêu chí
 
 ## Cách dùng
 
 ```
-/branding-check <link_google_sheet_danh_sach> <tên_dự_án>
+/seo-review <link_google_sheet_danh_sach>
 ```
 
 Ví dụ:
 ```
-/branding-check https://docs.google.com/spreadsheets/d/1abc.../edit SEONGON
+/seo-review https://docs.google.com/spreadsheets/d/1abc.../edit
 ```
 
 ## Cấu hình
 
-Skill này dùng chung file `.env` với `seo-content-review`:
-```
-~/.claude/skills/seo-content-reviewer/.env
+### Cài thư viện
+```bash
+pip install google-api-python-client google-auth python-dotenv
 ```
 
-Cần có:
-- `GOOGLE_CLIENT_ID`
-- `GOOGLE_CLIENT_SECRET`
-- `GOOGLE_REFRESH_TOKEN`
+### Tạo file `.env` (không commit)
+```bash
+cp .env.example .env
+# Điền GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, GOOGLE_REFRESH_TOKEN
+```
+
+### Lấy Google refresh token
+1. Vào https://developers.google.com/oauthplayground/
+2. ⚙️ → "Use your own OAuth credentials" → điền Client ID & Secret
+3. Thêm scopes: `spreadsheets` + `documents.readonly` → Authorize
+4. Exchange code → copy `refresh_token` vào `.env`
 
 ## Luồng hoạt động
 
 ```
-Input: Google Sheet content + tên dự án
-  └─ Đọc tab "Checklist branding" từ Master Sheet
-  └─ Lọc danh sách bài cần kiểm tra
+Input Google Sheet (tab đầu tiên)
+  └─ Lọc bài có trạng thái "Y/c duyệt"
+  └─ Lấy link Google Doc từng bài
 
-Với mỗi bài viết:
-  └─ Đọc nội dung Google Doc
-  └─ Claude CLI chấm theo từng tiêu chí branding
-  └─ Phân loại: ✅ đạt / ❌ chưa đạt / 👁 cần kiểm tra thủ công
+Output Google Sheet (cố định, ID trong .env)
+  └─ Fuzzy-match tên dự án → tìm đúng tab
+  └─ Đọc checklist từ header các cột
 
-Output → tab "Báo cáo Branding" trong Master Sheet
-  └─ Kết quả từng tiêu chí + ghi chú chi tiết lỗi
+Với mỗi bài:
+  └─ Đọc toàn bộ Google Doc
+  └─ Claude CLI kiểm tra từng tiêu chí (quét toàn bài, báo đủ lỗi)
+  └─ Append kết quả ✅/❌ + chi tiết lỗi vào output sheet
 ```
 
 ## Cấu trúc file
 
 ```
-branding-check/
-├── SKILL.md      ← file này
-└── skill.py      ← script chính
+seo-content-review/
+├── SKILL.md          ← file này
+├── skill.py          ← script chính
+├── .env.example      ← template cấu hình
+└── .gitignore        ← loại trừ .env
 ```
