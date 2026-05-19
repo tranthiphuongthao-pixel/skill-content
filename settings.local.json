@@ -1,0 +1,29 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pip3 --version)",
+      "Bash(pip3 install *)",
+      "mcp__claude_ai_Google_Drive__read_file_content",
+      "mcp__claude_ai_Google_Drive__search_files",
+      "mcp__claude_ai_Google_Drive__list_recent_files",
+      "Read(//Users/tuoiunnie/.claude/**)",
+      "Bash(python3 -c \"import requests, bs4, anthropic; print\\('OK'\\)\")",
+      "Bash(python3 -c \"from googleapiclient.discovery import build; print\\('googleapiclient OK'\\)\")",
+      "Bash(python3 -m py_compile ~/.claude/skills/branding-checker/skill.py)",
+      "Bash(python3 ~/.claude/skills/branding-checker/skill.py)",
+      "Bash(python3 *)",
+      "Bash(2>&1)",
+      "Bash(find /Users/tuoiunnie/Downloads -name \"*.xlsx\" -o -name \"*.docx\" -o -name \"*.txt\" 2>/dev/null | grep -v \"__MACOSX\" | sort | head -20)",
+      "Read(//Users/tuoiunnie/Downloads/**)",
+      "Bash(cp -r /Users/tuoiunnie/.claude/skills/branding-checker /Users/tuoiunnie/Downloads/Skills_content/.claude/skills/branding-check *)",
+      "Bash(chmod +x /Users/tuoiunnie/Downloads/Skills_content/run_bg.sh)",
+      "Bash(open *)",
+      "Bash(echo \"EXIT:$?\")",
+      "Bash(mkdir -p /Users/tuoiunnie/Downloads/Skills_content_github/skills/seo-content-review)",
+      "Bash(mkdir -p /Users/tuoiunnie/Downloads/Skills_content_github/skills/branding-check)",
+      "Bash(cp /Users/tuoiunnie/Downloads/Skills_content/.claude/skills/seo-content-review/SKILL.md /Users/tuoiunnie/Downloads/Skills_content_github/skills/seo-content-review/)",
+      "Bash(cp /Users/tuoiunnie/Downloads/Skills_content/.claude/skills/seo-content-review/skill.py /Users/tuoiunnie/Downloads/Skills_content_github/skills/seo-content-review/)",
+      "Bash(cp /Users/tuoiunnie/Downloads/Skills_content/.claude/skills/seo-content-review/.env.example /Users/tuoiunnie/Downloads/Skills_content_github/skills/seo-content-review/)"
+    ]
+  }
+}

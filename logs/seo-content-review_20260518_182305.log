@@ -1,0 +1,15 @@
+🔄 Kết nối Google APIs...
+📋 Đọc danh sách bài Y/c duyệt...
+Traceback (most recent call last):
+  File "/Users/tuoiunnie/.claude/skills/seo-content-reviewer/skill.py", line 391, in <module>
+    run(sys.argv[1])
+    ~~~^^^^^^^^^^^^^
+  File "/Users/tuoiunnie/.claude/skills/seo-content-reviewer/skill.py", line 347, in run
+    project_name, articles = read_input_sheet(sheets_svc, input_sheet_url)
+                             ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/tuoiunnie/.claude/skills/seo-content-reviewer/skill.py", line 82, in read_input_sheet
+    meta = sheets_svc.spreadsheets().get(spreadsheetId=sid).execute()
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/site-packages/googleapiclient/discovery.py", line 1121, in method
+    raise TypeError('Missing required parameter "%s"' % name)
+TypeError: Missing required parameter "spreadsheetId"

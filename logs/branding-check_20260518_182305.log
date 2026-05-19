@@ -1,0 +1,15 @@
+🔄 Kết nối Google APIs...
+
+📋 Bước 1: Đọc checklist branding — dự án 'SEONGON'
+Traceback (most recent call last):
+  File "/Users/tuoiunnie/.claude/skills/branding-checker/skill.py", line 703, in <module>
+    run(sys.argv[1], sys.argv[2])
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/tuoiunnie/.claude/skills/branding-checker/skill.py", line 647, in run
+    checklist = read_checklist_for_project(sheets_svc, project_name)
+  File "/Users/tuoiunnie/.claude/skills/branding-checker/skill.py", line 98, in read_checklist_for_project
+    raise ValueError(
+    ...<2 lines>...
+    )
+ValueError: Không tìm thấy cột dự án 'SEONGON' trong sheet checklist.
+Các header hiện có: ['Loại', 'Mô tả', 'Dự án DURAflex', 'Dự án VNPAY Số']
